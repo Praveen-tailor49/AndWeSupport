@@ -3,12 +3,17 @@ import { Table, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 
-
 const Meeting = ({ date }) => {
 
     const [data, setData] = useState([])
 
     useEffect(() => {
+
+        shoeData();
+       
+    })
+
+    const shoeData = () => {
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
@@ -18,7 +23,7 @@ const Meeting = ({ date }) => {
             .then(response => response.json())
             .then(result => setData(result))
             .catch(error => console.log('error', error));
-    })
+    }
 
     const deleteData = (id) => {
         var requestOptions = {
@@ -30,6 +35,7 @@ const Meeting = ({ date }) => {
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
+            shoeData();
     }
 
     return (
@@ -39,6 +45,7 @@ const Meeting = ({ date }) => {
                     <tr>
                         <th>No</th>
                         <th>Title</th>
+                        <th>About Program</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Action</th>
@@ -54,14 +61,15 @@ const Meeting = ({ date }) => {
                                         <tr>
                                             <td>{data.id}</td>
                                             <td>{data.title}</td>
+                                            <td>{data.about}</td>
                                             <td>{data.date}</td>
-                                            <td> {data.time} </td>
+                                            <td> {data.time} - {data.endTime} </td>
                                             <td><i class="fa fa-trash" aria-hidden="true" style={{ cursor: 'pointer' }} onClick={() => deleteData(data.id)}></i></td>
                                         </tr>
                                     </>
                                 )
                             }
-                        })
+                        })  
 
                     }
 
