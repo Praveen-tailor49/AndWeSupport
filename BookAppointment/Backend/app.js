@@ -67,6 +67,23 @@ app.post('/add-extra-service', (req, res) => {
     )
 })
 
+app.post('/addServiceDuration', (req, res) => {
+
+    const {duration, durationPrice, time} = req.body
+    db.query(
+        `INSERT INTO servicesduration (duration, durationPrice, time) VALUES (?,?,?)`,
+        [duration, durationPrice, time],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
 
 app.post('/showCategory', (req, res) => {
     db.query(
@@ -115,6 +132,17 @@ app.post('/showExtraService', (req, res) => {
         }
     )
 })
+
+app.post('/showDuration', (req, res) => {
+    const {id} = req.body
+    db.query(
+        `SELECT * FROM servicesduration`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
 
 
 

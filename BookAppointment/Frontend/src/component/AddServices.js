@@ -59,7 +59,7 @@ const AddServices = () => {
                         <Form.Label> Services Name</Form.Label>
                         <Form.Control type="text" placeholder="Category Services Name" onChange={(e) => setServiceName(e.target.value)} />
                     </Form.Group>
-
+                    
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label> Service Price</Form.Label>
                         <Form.Control type="text" placeholder="Services Price" onChange={(e) => setServicesPrice(e.target.value)} />
