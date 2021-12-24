@@ -1,49 +1,99 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { Button } from 'react-bootstrap';
 
 
-const Calender = ({getTime}) => {
+const Calender = ({ getTime, setCalDate, setButtonId }) => {
 
     const [date, setDate] = useState(new Date());
+    const [slot, setSlot] = useState([]);
+    const [bookinData, setBookingData] = useState([])
 
+    useEffect(() => {
+        
+        soltDatas();
+    })
 
-    const handleShow = (e) => {
-        setDate(e);
+    const soltDatas = () => {
+        var requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
 
-        document.getElementById('showTimeDiv').style.display = 'block'
+        fetch("http://localhost:3001/showSlot", requestOptions)
+            .then(response => response.json())
+            .then(result => setSlot(result))
+            .catch(error => console.log('error', error))
     }
 
-    console.log(date);
+    const handleShow = (e) => {
+
+        setDate(e);
+        console.log(e.toString().slice(0, 15));
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "date": e.toString().slice(0, 15)
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:3001/showSlotBooking", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result.length > 0) {
+                    setBookingData(result)
+                    console.log(result);
+
+                }
+            }
+            )
+            .catch(error => console.log('error', error));
+
+        document.getElementById('showTimeDiv').style.display = 'block';
+    }
+
+    const dis = () => {
+        bookinData.map(val => {
+            document.getElementById(val.btnId).disabled = true;
+        })
+    }
 
     return (
         <>
-            <div style={{display:'flex', justifyContent:'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Calendar
                     value={date}
-                    onClickDay={handleShow}
+                    onClickDay={(e) => handleShow(e)}
                     onClickMonth={handleShow}
+
                 />
             </div>
 
-            <div style={{ display: 'none', marginTop:'10px' }} id='showTimeDiv'>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gridGap: '15px' }}>
-                    <Button variant="success" value='8.00' onClick={(e)=>getTime(e.target.value)}>8.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >8.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >9.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >9.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >10.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >10.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >11.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >11.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >12.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >12.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >1.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >1.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >2.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >2.30</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >3.00</Button>
-                    <Button variant="success" onClick={(e)=>getTime(e.target.value)} >3.00</Button>
+            <div style={{ display: 'none', marginTop: '10px' }} id='showTimeDiv'>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gridGap: '10px' }}>
+
+                    {
+                        bookinData.length !== 0 ?
+                            slot.map(data => {
+
+                                return (
+                                    <Button variant="success" id={data.id} style={{ width: '100px', marginLeft: '10px' }} value={data.date} onClick={(e) => { getTime(e.target.value); setCalDate(date.toString()); setButtonId(data.id) }}>{data.date}</Button>
+                                )
+                            })
+                            :
+                            slot.map(data => {
+                                return (
+                                    <Button variant="success" style={{ width: '100px', marginLeft: '10px' }} value={data.date} onClick={(e) => { getTime(e.target.value); setCalDate(date.toString()); setButtonId(data.id) }}>{data.date}</Button>
+                                )
+                            })
+                    }
                 </div>
             </div>
         </>

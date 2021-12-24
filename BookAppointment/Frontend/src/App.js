@@ -8,6 +8,7 @@ import {Routes, Route} from 'react-router-dom'
 import AddServices from './component/AddServices';
 import AddExtraService from './component/AddExtraService';
 import AddDuration from './component/AddDuration';
+import AddSlot from './component/AddSlot';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/add-services' element={<AddServices/>} />
         <Route exact path='/add-extra-services' element={<AddExtraService/>} />
         <Route exact path='/add-duration' element={<AddDuration/>} />
+        <Route exact path='/slote' element={<AddSlot/>} />
       </Routes>
     </>
   );

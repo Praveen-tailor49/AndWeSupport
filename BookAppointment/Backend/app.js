@@ -84,6 +84,40 @@ app.post('/addServiceDuration', (req, res) => {
     )
 })
 
+app.post('/slots', (req, res) => {
+
+    const {date, slote, time} = req.body
+    db.query(
+        `INSERT INTO slots (date, slote, time) VALUES (?,?,?)`,
+        [date, slote, time],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+app.post('/bookSlots', (req, res) => {
+
+    const {date, time, userName, phone, email, service, extraService, btnId} = req.body
+    db.query(
+        `INSERT INTO bookslot (date, time, userName, phone, email, service, extraService, btnId) VALUES (?,?,?,?,?,?,?,?)`,
+        [date, time, userName, phone, email, service, extraService, btnId],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
 
 app.post('/showCategory', (req, res) => {
     db.query(
@@ -134,10 +168,33 @@ app.post('/showExtraService', (req, res) => {
 })
 
 app.post('/showDuration', (req, res) => {
-    const {id} = req.body
+    // const {id} = req.body
     db.query(
         `SELECT * FROM servicesduration`,
         (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+app.post('/showSlot', (req, res) => {
+    
+    db.query(
+        `SELECT * FROM slots`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+app.post('/showSlotBooking', (req, res) => {
+    const {date} = req.body
+    db.query(
+        `SELECT * FROM bookslot WHERE date = "${date}"`,
+        (err, result) => {
+            if(err){
+                return res.send(err)
+            }
             return res.json(result);
         }
     )

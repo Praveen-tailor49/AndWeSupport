@@ -21,6 +21,7 @@ const Home = () => {
                     <Modals
                         show={modalShow}
                         onHide={() => setModalShow(false)}
+                        setModalShow={setModalShow}
                     />
                 </div>
             </div>

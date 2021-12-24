@@ -9,8 +9,20 @@ const Modals = (props) => {
     const [allService, setAllService] = useState([])
     const [allExtraService, setAllExtraService] = useState([])
     const [duration, setDuration] = useState([])
-    const [allDuration, setAllDuration] = useState([])
     const [bookTime, setBookTime] = useState('')
+    const [show, setShow] = useState(false);
+
+    const [firstName, setfirstName] = useState('')
+    const [lastName, setlastName] = useState('')
+    const [email, setemail] = useState('')
+    const [phoneNumber, setphoneNumber] = useState('')
+    const [comments, setcomments] = useState('')
+    const [service, setservice] = useState('')
+    const [categoryName, setcategoryName] = useState('')
+    const [extraServices, setextraServices] = useState('')
+    const [calDate, setCalDate] = useState('')
+    const [buttonId, setButtonId] = useState('')
+
 
 
     useEffect(() => {
@@ -36,7 +48,10 @@ const Modals = (props) => {
             .catch(error => console.log('error', error));
     }, [])
 
-    const servicesData = (id) => {
+    const servicesData = (id, categoryName) => {
+
+        setcategoryName(categoryName)
+
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -63,7 +78,17 @@ const Modals = (props) => {
             .catch(error => console.log('error', error));
     }
 
-    const extraServicesData = (id) => {
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+
+        props.setModalShow(false)
+        setShow(true)
+        bookSlote();
+    };
+
+    const extraServicesData = (id, serviceName) => {
+
+        setservice(serviceName)
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -92,13 +117,15 @@ const Modals = (props) => {
             .catch(error => console.log('error', error));
     }
 
-    const durationD = () => {
+    const durationD = (serviceName) => {
+
+        setextraServices(serviceName)
         document.getElementById('show3').style.display = 'none';
         document.getElementById('show4').style.display = 'block';
     }
 
-    const calendar = (data) => {
-        setAllDuration(data)
+    const calendar = () => {
+
         document.getElementById('show4').style.display = 'none';
         document.getElementById('show5').style.display = 'block';
     }
@@ -114,9 +141,40 @@ const Modals = (props) => {
         document.getElementById('show6').style.display = 'block';
     }
 
+    const bookSlote = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "date": calDate.slice(0, 15),
+            "time": bookTime,
+            "userName": firstName + lastName,
+            "phone": phoneNumber,
+            "email": email,
+            "service": categoryName,
+            "extraService":extraServices,
+            "btnId": buttonId
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:3001/bookSlots", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => console.log('error', error));
+    }
+
+
     return (
         <>
-            <div>
+            <div style={{ display: 'block' }} id='firstModal'>
 
                 <Modal
                     {...props}
@@ -155,7 +213,7 @@ const Modals = (props) => {
                                             <>
                                                 <Card style={{ margin: '10px', cursor: 'pointer' }}>
                                                     <Card.Body>
-                                                        <h6 onClick={() => servicesData(data.id)}> <i class="fas fa-tooth"></i> {data.categoryName}</h6>
+                                                        <h6 onClick={() => servicesData(data.id, data.categoryName)}> <i class="fas fa-tooth"></i> {data.categoryName}</h6>
                                                     </Card.Body>
                                                 </Card>
                                             </>
@@ -174,7 +232,7 @@ const Modals = (props) => {
                                             <>
                                                 <Card style={{ margin: '10px', cursor: 'pointer' }}>
                                                     <Card.Body>
-                                                        <h6 onClick={() => extraServicesData(data.id)}> <i class="fas fa-tooth"></i> {data.serviceName} <span style={{ marginLeft: '50%', color: 'blue' }}>{data.servicesPrice}</span></h6>
+                                                        <h6 onClick={() => extraServicesData(data.id, data.serviceName)}> <i class="fas fa-tooth"></i> {data.serviceName} <span style={{ marginLeft: '50%', color: 'blue' }}>{data.servicesPrice}</span></h6>
                                                     </Card.Body>
                                                 </Card>
                                             </>
@@ -193,7 +251,7 @@ const Modals = (props) => {
                                             <>
                                                 <Card style={{ margin: '10px', cursor: 'pointer' }}>
                                                     <Card.Body>
-                                                        <h6 onClick={() => durationD()}> <i class="fas fa-tooth"></i> {data.serviceName} <span style={{ marginLeft: '50%', color: 'blue' }}>{data.servicesPrice}</span></h6>
+                                                        <h6 onClick={() => durationD(data.serviceName)}> <i class="fas fa-tooth"></i> {data.serviceName} <span style={{ marginLeft: '50%', color: 'blue' }}>{data.servicesPrice}</span></h6>
                                                     </Card.Body>
                                                 </Card>
                                             </>
@@ -215,7 +273,10 @@ const Modals = (props) => {
                                             return (
                                                 <>
 
-                                                    <Card style={{ width: '10rem', cursor: 'pointer' }} onClick={() => calendar(data)}>
+                                                    <Card style={{ width: '10rem', cursor: 'pointer' }} onClick={() => {
+                                                        calendar();
+                                                    }
+                                                    }  >
                                                         <Card.Body>
                                                             <div style={{ display: 'flex', justifyContent: 'end' }}>
 
@@ -242,7 +303,7 @@ const Modals = (props) => {
                             </Modal.Body>
                             <div style={{ display: 'none' }} id='show5'>
                                 <Modal.Body >
-                                    <Calendar getTime={getTime} />
+                                    <Calendar getTime={getTime} setCalDate={setCalDate} setButtonId={setButtonId}/>
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <div style={{ display: 'none' }} id='showButton'>
@@ -257,37 +318,37 @@ const Modals = (props) => {
                                         <Row className="mb-3">
                                             <Form.Group as={Col} controlId="formGridEmail">
                                                 <Form.Label>First Name</Form.Label>
-                                                <Form.Control type="text" placeholder="Enter First Name" />
+                                                <Form.Control type="text" placeholder="Enter First Name" onChange={(e) => setfirstName(e.target.value)} />
                                             </Form.Group>
 
                                             <Form.Group as={Col} controlId="formGridPassword">
                                                 <Form.Label>Last Name</Form.Label>
-                                                <Form.Control type="text" placeholder="Enter Last Name" />
+                                                <Form.Control type="text" placeholder="Enter Last Name" onChange={(e) => setlastName(e.target.value)} />
                                             </Form.Group>
                                         </Row>
 
                                         <Row className="mb-3">
                                             <Form.Group as={Col} controlId="formGridEmail">
                                                 <Form.Label>Phone No.</Form.Label>
-                                                <Form.Control type="text" placeholder="Enter number" />
+                                                <Form.Control type="text" placeholder="Enter number" onChange={(e) => setphoneNumber(e.target.value)} />
                                             </Form.Group>
 
                                             <Form.Group as={Col} controlId="formGridPassword">
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" placeholder="Enter Email" />
+                                                <Form.Control type="email" placeholder="Enter Email" onChange={(e) => setemail(e.target.value)} />
                                             </Form.Group>
                                         </Row>
 
                                         <Row >
                                             <FloatingLabel controlId="floatingTextarea" label="Comments" className="mb-3">
-                                                <Form.Control as="textarea" placeholder="Leave a comment here" />
+                                                <Form.Control as="textarea" placeholder="Leave a comment here" onChange={(e) => setcomments(e.target.value)} />
                                             </FloatingLabel>
                                         </Row>
                                     </Form>
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <div >
-                                        <Button>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></Button>
+                                        <Button onClick={handleShow}>Next <i class="fa fa-arrow-right" aria-hidden="true"></i></Button>
                                     </div>
                                 </Modal.Footer>
                             </div>
@@ -295,9 +356,50 @@ const Modals = (props) => {
                     </div>
                 </Modal>
             </div>
-            
+
             <div>
-                
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title style={{ color: '#2d54de' }}>Confirmation</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div style={{ color: '#2d54de' }}>
+                            <h6>Customer Info</h6>
+                            <hr />
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridGap: '20px' }}>
+                            <div>
+                                Name: {firstName} {lastName}
+                            </div>
+                            <div>
+                                Phone No. {phoneNumber}
+                            </div>
+
+                            <div>
+                                Email: {email}
+                            </div>
+                        </div>
+                        <hr />
+                        <div style={{ color: '#2d54de' }}>
+                            <h6>Appointment Info</h6>
+                            <hr />
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'auto auto', gridGap: '20px' }}>
+                            <div>
+                                DATE: {calDate.slice(0, 15)}
+                            </div>
+                            <div>
+                                TIME: {bookTime}
+                            </div>
+                            <div>
+                                SERVICE: {categoryName}
+                            </div>
+                            <div>
+                                EXTRAS: {extraServices}
+                            </div>
+                        </div>
+                    </Modal.Body>
+                </Modal>
             </div>
         </>
     )
