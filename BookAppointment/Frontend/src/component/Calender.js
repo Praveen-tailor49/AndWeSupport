@@ -13,10 +13,13 @@ const Calender = ({ getTime, setCalDate, setButtonId }) => {
         
         soltDatas();
 
+        bookingData();
+
     }, [])
 
     const soltDatas = () => {
-        var requestOptions = {
+
+        let requestOptions = {
             method: 'POST',
             redirect: 'follow'
         };
@@ -25,15 +28,12 @@ const Calender = ({ getTime, setCalDate, setButtonId }) => {
             .then(response => response.json())
             .then(result => setSlot(result))
             .catch(error => console.log('error', error))
+        
+    }
 
-
-
-        let myHeaders = new Headers();
+    const bookingData = () =>{
+         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-
-        // let raw = JSON.stringify({
-        //     "date": e.toString().slice(0, 15)
-        // });
 
         let requestOption = {
             method: 'POST',
@@ -49,27 +49,33 @@ const Calender = ({ getTime, setCalDate, setButtonId }) => {
                     setBookingData(result)   
                 }
             })
-            // .then(() => dis())
-            .catch(error => console.log('error', error)); 
-    }
+            .catch(error => console.log('error', error));
+    } 
+
+
 
     const handleShow = (e) => {
         setDate(e);
 
-        slot.forEach(data => {
-            document.getElementById(data.id).disabled = false;
-        })
+        // slot.forEach(data => {
+        //     document.getElementById(data.id).disabled = false;
+        // })
+        enbaleButton()
 
         dis(e)
 
+    }
+
+    const enbaleButton = () => {
+         slot.forEach(data => {
+            document.getElementById(data.id).disabled = false;
+        })
     }
 
     const dis = (d = date ) => {
 
 
         bookinData.forEach(val => {
-            // console.log(val)
-            // console.log(date)
             if(d.toString().slice(0,15) === val.date){
                 console.log('MATCH')
                 document.getElementById(val.btnId).disabled = true;
