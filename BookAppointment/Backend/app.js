@@ -187,10 +187,23 @@ app.post('/showSlot', (req, res) => {
     )
 })
 
+// app.post('/showSlotBooking', (req, res) => {
+//     const {date} = req.body
+//     db.query(
+//         `SELECT * FROM bookslot WHERE date = "${date}"`,
+//         (err, result) => {
+//             if(err){
+//                 return res.send(err)
+//             }
+//             return res.json(result);
+//         }
+//     )
+// })
+
 app.post('/showSlotBooking', (req, res) => {
     const {date} = req.body
     db.query(
-        `SELECT * FROM bookslot WHERE date = "${date}"`,
+        `SELECT * FROM bookslot `,
         (err, result) => {
             if(err){
                 return res.send(err)

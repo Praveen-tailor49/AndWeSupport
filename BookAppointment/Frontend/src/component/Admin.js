@@ -8,20 +8,21 @@ const Admin = () => {
     return (
         <>
             <NavBar />
-            <div style={{ display:'grid', gridTemplateColumns: 'auto auto auto' }}>
-                <div style={{ margin: '100px' }}>
-                    <Card style={{ width: '22rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
+            <div style={{margin:'20px'}}>
+            <div style={{ display:'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gridGap:'20px' }}>
+                <div >
+                    <Card style={{ width: '19rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
                         <Card.Body>
                             <Card.Title>Add Category</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Services</Card.Subtitle>
-                            <Link to='/add-category'><Button style={{ border: 'none', marginLeft: '10px', background: '#2d54de', boxShadow: "1px 1px 2px gray" }}>Add Service Catgory</Button></Link>
+                            <Link to='/add-category'><Button style={{ border: 'none', marginLeft: '10px', background: '#2d54de', boxShadow: "1px 1px 2px gray" }}>Add Catgory</Button></Link>
                             <Button style={{ border: 'none', marginLeft: '10px', background: '#2d54de', boxShadow: "1px 1px 2px gray" }}>Show service</Button>
                         </Card.Body>
                     </Card>
                 </div>
 
-                <div style={{ margin: '100px' }}>
-                    <Card style={{ width: '22rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
+                <div >
+                    <Card style={{ width: '19rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
                         <Card.Body>
                             <Card.Title>Add Service</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Services</Card.Subtitle>
@@ -31,8 +32,8 @@ const Admin = () => {
                     </Card>
                 </div>
 
-                <div style={{ margin: '100px' }}>
-                    <Card style={{ width: '22rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
+                <div >
+                    <Card style={{ width: '19rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
                         <Card.Body>
                             <Card.Title>Add Extra Service</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Services</Card.Subtitle>
@@ -42,8 +43,8 @@ const Admin = () => {
                     </Card>
                 </div>
 
-                <div style={{ margin: '100px' }}>
-                    <Card style={{ width: '22rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
+                <div >
+                    <Card style={{ width: '19rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
                         <Card.Body>
                             <Card.Title>Add Service Duration</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Services</Card.Subtitle>
@@ -53,8 +54,8 @@ const Admin = () => {
                     </Card>
                 </div>
 
-                <div style={{ margin: '100px' }}>
-                    <Card style={{ width: '22rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
+                <div >
+                    <Card style={{ width: '19rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
                         <Card.Body>
                             <Card.Title>Add Time Slot</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Services</Card.Subtitle>
@@ -65,7 +66,7 @@ const Admin = () => {
                 </div>
 
             </div>
-
+            </div>
         </>
     )
 }

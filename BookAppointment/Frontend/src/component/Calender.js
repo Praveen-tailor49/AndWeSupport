@@ -12,7 +12,8 @@ const Calender = ({ getTime, setCalDate, setButtonId }) => {
     useEffect(() => {
         
         soltDatas();
-    })
+
+    }, [])
 
     const soltDatas = () => {
         var requestOptions = {
@@ -24,55 +25,71 @@ const Calender = ({ getTime, setCalDate, setButtonId }) => {
             .then(response => response.json())
             .then(result => setSlot(result))
             .catch(error => console.log('error', error))
-    }
 
-    const handleShow = (e) => {
 
-        setDate(e);
-        console.log(e.toString().slice(0, 15));
-        var myHeaders = new Headers();
+
+        let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-            "date": e.toString().slice(0, 15)
-        });
+        // let raw = JSON.stringify({
+        //     "date": e.toString().slice(0, 15)
+        // });
 
-        var requestOptions = {
+        let requestOption = {
             method: 'POST',
             headers: myHeaders,
-            body: raw,
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3001/showSlotBooking", requestOptions)
+        fetch("http://localhost:3001/showSlotBooking", requestOption)
             .then(response => response.json())
             .then(result => {
                 if (result.length > 0) {
-                    setBookingData(result)
-                    console.log(result);
-
+                    console.log(result)
+                    setBookingData(result)   
                 }
-            }
-            )
-            .catch(error => console.log('error', error));
+            })
+            // .then(() => dis())
+            .catch(error => console.log('error', error)); 
+    }
 
+    const handleShow = (e) => {
+        setDate(e);
+
+        slot.forEach(data => {
+            document.getElementById(data.id).disabled = false;
+        })
+
+        dis(e)
+
+    }
+
+    const dis = (d = date ) => {
+
+
+        bookinData.forEach(val => {
+            // console.log(val)
+            // console.log(date)
+            if(d.toString().slice(0,15) === val.date){
+                console.log('MATCH')
+                document.getElementById(val.btnId).disabled = true;
+            }
+        })
         document.getElementById('showTimeDiv').style.display = 'block';
     }
-
-    const dis = () => {
-        bookinData.map(val => {
-            document.getElementById(val.btnId).disabled = true;
-        })
-    }
+    
 
     return (
         <>
+
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Calendar
                     value={date}
                     onClickDay={(e) => handleShow(e)}
                     onClickMonth={handleShow}
-
+                    tileDisabled={ ({activeStartDate, date, view }) =>
+                        date.getDay() === 0 || date.getDay() === 6 || (date < new Date() ? true : false)
+                    }   
                 />
             </div>
 
