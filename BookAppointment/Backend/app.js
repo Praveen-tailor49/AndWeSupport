@@ -118,6 +118,52 @@ app.post('/bookSlots', (req, res) => {
     )
 })
 
+app.post('/userSignin', (req, res) => {
+
+    const { name, email, password } = req.body;
+    db.query(`INSERT INTO userdata (name, email, password) VALUES (?,?,?)`,
+        [name, email, password],
+        (err, result) => {
+            if (err) {
+                res.status(400).json('Already Register');
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+app.post('/userLogin', (req, res) => {
+    const { email, password } = req.body;
+    console.log(email);
+    db.query(
+        `SELECT * FROM userdata WHERE email='${email}' AND password='${password}'`,
+        (err, result) => {
+            if(result.length === 0) {
+                res.json('Email and Password is wrong');
+            } else if(result.length === 1) {
+                res.status(200).json({message:'Successfully', data:result});
+            } else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/adminLogin', (req, res) => {
+    const { email, password } = req.body;
+
+    if(email === '' || password === ''){
+        res.send('empty felid ')
+    } else if(email === 'admin123@gmail.com' && password === 'admin123'){
+        res.send('Successfully')
+    } else (
+        res.send('user not found')
+    )
+})
+
 
 app.post('/showCategory', (req, res) => {
     db.query(
