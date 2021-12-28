@@ -97,7 +97,7 @@ const Calender = ({ getTime, setCalDate, setButtonId }) => {
                     onClickDay={(e) => handleShow(e)}
                     onClickMonth={handleShow}
                     minDate={new Date()}
-                    tileDisabled={({ activeStartDate, date, view }) =>
+                    tileDisabled={({ date }) =>
                         date.getDay() === 0 || date.getDay() === 6
                     }
                 />

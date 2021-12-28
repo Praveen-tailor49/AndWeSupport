@@ -10,13 +10,13 @@ const Admin = () => {
             <NavBar />
             <div style={{margin:'20px'}}>
             <div style={{ display:'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gridGap:'20px' }}>
-                <div >
+                <div>
                     <Card style={{ width: '19rem', background: 'linear-gradient(to right, rgb(214, 214, 214), rgb(253, 247, 247))', boxShadow: "1px 1px 2px gray" }}>
                         <Card.Body>
                             <Card.Title>Add Category</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Services</Card.Subtitle>
                             <Link to='/add-category'><Button style={{ border: 'none', marginLeft: '10px', background: '#2d54de', boxShadow: "1px 1px 2px gray" }}>Add Catgory</Button></Link>
-                            <Button style={{ border: 'none', marginLeft: '10px', background: '#2d54de', boxShadow: "1px 1px 2px gray" }}>Show service</Button>
+                            <Link to='/show-category'><Button style={{ border: 'none', marginLeft: '10px', background: '#2d54de', boxShadow: "1px 1px 2px gray" }}>Show service</Button></Link>
                         </Card.Body>
                     </Card>
                 </div>

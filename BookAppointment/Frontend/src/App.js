@@ -13,6 +13,7 @@ import ViewBookings from './component/ViewBookings';
 import LoginUser from './component/LoginUser';
 import LoginAdmin from './component/LoginAdmin';
 import Register from './component/Register';
+import ShowCatgory from './component/ShowCatgory';
 import AuthUser from './AuthUser';
 import AuthAdmin from './AuthAdmin';
 
@@ -38,6 +39,7 @@ function App() {
         <Route exact path='/add-duration' element={<AuthAdmin cmp={AddDuration}/>} />
         <Route exact path='/slote' element={<AuthAdmin cmp={AddSlot} />} />
         <Route exact path='/all-bookings' element={<AuthAdmin cmp={ViewBookings} />} />
+        <Route exact path='/show-category' element={<AuthAdmin cmp={ShowCatgory} />} />
 
       </Routes>
     </>

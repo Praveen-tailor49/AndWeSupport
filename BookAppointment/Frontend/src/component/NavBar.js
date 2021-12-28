@@ -9,7 +9,7 @@ const NavBar = () => {
 
     const logout = () => {
         localStorage.removeItem('admin')
-        navigate('/')
+        navigate('/login')
     }
 
     return (
@@ -24,7 +24,7 @@ const NavBar = () => {
                     </div>
 
                     <div>
-                            <Button variant="danger" onClick={()=>{logout()}}>Logout</Button>
+                            <Button variant="danger" onClick={()=>{logout()}}>Logout</Button> 
                     </div>
                 </Container>
             </Navbar>
