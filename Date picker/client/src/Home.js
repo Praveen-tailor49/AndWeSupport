@@ -13,6 +13,7 @@ const Home = ({ sendData }) => {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState('');
     const [button, setButton] = useState([]);
+    const api = "http://localhost:3000/time";
 
     useEffect(() => {
         var requestOptions = {
@@ -20,7 +21,7 @@ const Home = ({ sendData }) => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3000/time", requestOptions)
+        fetch(api, requestOptions)
             .then(response => response.json())
             .then(result => setButton(result))
             .catch(error => console.log('error', error));

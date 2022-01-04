@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const AllEvent = () => {
 
     const [data, setData] = useState([])
+    const api = "http://localhost:3000/schedule";
 
     useEffect(() => {
 
@@ -21,7 +22,7 @@ const AllEvent = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3000/schedule", requestOptions)
+        fetch(api, requestOptions)
             .then(response => response.json())
             .then(result => setData(result))
             .catch(error => console.log('error', error));

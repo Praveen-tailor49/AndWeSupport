@@ -8,6 +8,7 @@ const About = ({date, time}) => {
     const [title, setTitle] = useState('')
     const [about, setAbout] = useState('')
     const [schedule, setSchedule] = useState('')
+    const api = "http://localhost:3000/schedule";
 
     var endtime = time.slice(0,3)+" "+schedule;
     const sendData = () => {
@@ -24,7 +25,7 @@ const About = ({date, time}) => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3000/schedule", requestOptions)
+        fetch(api, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));

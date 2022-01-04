@@ -27,11 +27,6 @@ const Thankyou = () => {
                   Add to Google Calender
                 </Button>
             </div>
-
-
-            {/* <footer class="site-footer" id="footer">
-		<p class="site-footer__fineprint" id="fineprint">Copyright ©2014 | All Rights Reserved</p>
-	</footer> */}
         </>
     )
 }

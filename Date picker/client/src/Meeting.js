@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Meeting = ({ date }) => {
 
     const [data, setData] = useState([])
+    const api = "http://localhost:3000/schedule";
 
     useEffect(() => {
 
@@ -19,7 +20,7 @@ const Meeting = ({ date }) => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3000/schedule", requestOptions)
+        fetch(api, requestOptions)
             .then(response => response.json())
             .then(result => setData(result))
             .catch(error => console.log('error', error));
@@ -31,7 +32,7 @@ const Meeting = ({ date }) => {
             redirect: 'follow'
         };
 
-        fetch(`http://localhost:3000/schedule/${id}`, requestOptions)
+        fetch(api/id , requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
