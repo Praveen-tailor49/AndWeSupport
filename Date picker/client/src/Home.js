@@ -13,7 +13,7 @@ const Home = ({ sendData }) => {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState('');
     const [button, setButton] = useState([]);
-    const api = "http://localhost:3000/time";
+    
 
     useEffect(() => {
         var requestOptions = {
@@ -21,7 +21,7 @@ const Home = ({ sendData }) => {
             redirect: 'follow'
         };
 
-        fetch(api, requestOptions)
+        fetch("https://json-database-datebooking.herokuapp.com/time", requestOptions)
             .then(response => response.json())
             .then(result => setButton(result))
             .catch(error => console.log('error', error));

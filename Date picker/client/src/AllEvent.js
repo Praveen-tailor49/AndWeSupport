@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const AllEvent = () => {
 
     const [data, setData] = useState([])
-    const api = "http://localhost:3000/schedule";
 
     useEffect(() => {
 
@@ -22,7 +21,7 @@ const AllEvent = () => {
             redirect: 'follow'
         };
 
-        fetch(api, requestOptions)
+        fetch("https://json-database-datebooking.herokuapp.com/schedule", requestOptions)
             .then(response => response.json())
             .then(result => setData(result))
             .catch(error => console.log('error', error));
@@ -34,7 +33,7 @@ const AllEvent = () => {
             redirect: 'follow'
         };
 
-        fetch(`http://localhost:3000/schedule/${id}`, requestOptions)
+        fetch(`https://json-database-datebooking.herokuapp.com/schedule/${id}`, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
