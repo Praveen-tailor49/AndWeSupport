@@ -6,6 +6,8 @@ import {Routes, Route} from "react-router-dom"
 import CreateEvent from './components/CreateEvent';
 import EventForm from './components/EventForm';
 import EventDuration from './components/EventDuration';
+import Calender from './components/Calender';
+import SignUp from './components/SignUp';
  
 function App() {
 
@@ -34,7 +36,9 @@ const handlshow = (e) => {
   return (
     <>
       <Routes>
-          <Route path = '/' element= {<Home/>} />
+          <Route path = '/' element= {<SignUp/>} />
+          <Route path = '/home' element= {<Home/>} />
+          <Route path = '/calender' element= {<Calender/>} />
           <Route path = '/events' element= {<CreateEvent eventType={eventType}/>} />
           <Route path = '/eventsForm' element= {<EventForm handlshow={handlshow} state={state} />} />
           <Route path = '/eventsDuration' element= {<EventDuration eventT={eventT} state={state}  />} />

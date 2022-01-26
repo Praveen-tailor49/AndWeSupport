@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Container, Row, Col, ListGroup } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 
 
 const Cards = () => {
@@ -26,16 +27,15 @@ const Cards = () => {
                 <Container>
                     <Row>
                         {
-                            eventData.map((val) => {
+                            eventData.map((val, index) => {
                                 return (
-
-                                    <Col>
+                                    <Col key={index}>
                                         <Card style={{ width: '18rem', marginTop: '12px' }}>
                                             <Card.Body>
                                                 <Card.Title>{val.eventName}</Card.Title>
                                                 <Card.Subtitle className="mb-2 text-muted">{val.duration} {val.eventType}</Card.Subtitle>
                                                 <Card.Text>
-                                                    View booking page
+                                                   <Link to=''> View booking page </Link> 
                                                 </Card.Text>
 
                                                 <ListGroup variant="flush">
