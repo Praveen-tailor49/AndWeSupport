@@ -17,6 +17,22 @@ const db = mysql.createConnection({
 });
 
 
+app.post('/SignUp', (req, res) => {
+
+    const { userName, userEmail, userPassward, userToken } = req.body;
+    db.query(`INSERT INTO userdata (userName, userEmail, userPassward, userToken) VALUES (?,?,?,?)`,
+        [userName, userEmail, userPassward, userToken],
+        (err, result) => {
+            if (err) {
+                res.status(400).json('Already Register');
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
 
 app.post('/events', (req, res) => {
 
