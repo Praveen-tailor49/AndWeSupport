@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import emailjs from "@emailjs/browser"
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import img from '../image/back-img.jpg'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const SignUp = () => {
 
@@ -15,14 +15,28 @@ const SignUp = () => {
     const [userData, setUserData] = useState({
         userName: '',
         userEmail: '',
-        userPassward: ''
+        userPassward: '',
+        userReData: []
     })
 
     useEffect(() => {
         const otp = Math.floor(1000 + Math.random() * 9000);
-        console.log(otp);
         setOtp(otp)
+
+        userRegData()
     }, [])
+
+    const userRegData = () => {
+        var requestOptions = {
+            method: 'POST',
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:3001/userData", requestOptions)
+            .then(response => response.json())
+            .then(result => setUserData({ userReData: result }))
+            .catch(error => console.log('error', error));
+    }
 
     const handlshow = (e) => {
 
@@ -37,14 +51,33 @@ const SignUp = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('service_mocy6ly', 'template_4rvhjcd', e.target, "user_ZAGjoe6gJVVDW5JLRe4NG")
-            .then((result) => {
-                setShow(true)
-                document.getElementById('showDiv1').style.display = 'none';
-                document.getElementById('showDiv2').style.display = 'block';
-            }, (error) => {
-                console.log(error.text);
-            });
+        if (userData.userReData.length > 0 || userData.userReData.length === 0) {
+            userData.userReData.forEach(val => {
+                if (userData.userEmail === val.userEmail) {
+                    document.getElementById('emailErrShow').style.display = 'block';
+                } else {
+                    emailjs.sendForm('service_mocy6ly', 'template_4rvhjcd', e.target, "user_ZAGjoe6gJVVDW5JLRe4NG")
+                        .then((result) => {
+                            setShow(true)
+                            document.getElementById('showDiv1').style.display = 'none';
+                            document.getElementById('showDiv2').style.display = 'block';
+                        }, (error) => {
+                            console.log(error.text);
+                        });
+                }
+            })
+        // } else if (userData.userReData.length === 0) {
+        //     emailjs.sendForm('service_mocy6ly', 'template_4rvhjcd', e.target, "user_ZAGjoe6gJVVDW5JLRe4NG")
+        //         .then((result) => {
+        //             setShow(true)
+        //             document.getElementById('showDiv1').style.display = 'none';
+        //             document.getElementById('showDiv2').style.display = 'block';
+        //         }, (error) => {
+        //             console.log(error.text);
+        //         });
+        }
+
+
     }
 
     const verify = () => {
@@ -86,6 +119,7 @@ const SignUp = () => {
                 if (result === 'Successfully') {
                     alert('User Successfully Add')
                     navigate("/home")
+                    localStorage.setItem('token', token)
                 } else if (result === 'Already Register') {
                     alert('Already Register')
                 }
@@ -100,11 +134,11 @@ const SignUp = () => {
                     show ?
                         <>
 
-                            <Alert variant="success" onClose={() => setShow(false)} dismissible>
+                            <Alert variant="success"  >
                                 <Alert.Heading>Otp send your email</Alert.Heading>
                             </Alert>
                             <Container fluid>
-                                <div style={{ width: '26%', height: '40%', boxShadow: "10px 10px 10px 10px #888888", position: 'absolute', marginTop: '10%' }}>
+                                <div style={{ width: '26%', height: '44%', boxShadow: "10px 10px 10px 10px #888888", position: 'absolute', marginTop: '10%' }}>
                                     <div id='showDiv1' style={{ display: 'block' }}>
 
                                         <Form style={{ padding: '30px' }} ref={form} onSubmit={sendEmail} >
@@ -118,6 +152,7 @@ const SignUp = () => {
                                             <Form.Group className="mb-3" >
                                                 <Form.Label>Email address</Form.Label>
                                                 <Form.Control type="email" name='userEmail' value={userData.userEmail} placeholder="enter email" autoComplete='off' onChange={handlshow} required />
+
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" >
@@ -128,9 +163,6 @@ const SignUp = () => {
                                                 <Form.Label>Password</Form.Label>
                                                 <Form.Control type="password" name='userPassward' value={userData.userPassward} placeholder="enter password" autoComplete='off' onChange={handlshow} required />
                                             </Form.Group>
-
-                                            <input name='otp' value={otps} placeholder="Otp will send to your mail" style={{ border: "none" }} hidden />
-
 
                                             <div style={{ display: 'grid', justifyItems: 'center' }}>
                                                 <Button type='submit' variant="primary"> SignUp </Button>
@@ -144,7 +176,7 @@ const SignUp = () => {
                                             <hr />
                                             <Form.Group className="mb-3" >
                                                 <Form.Label>Enter Otp</Form.Label>
-                                                <Form.Control type="text" name='userotp' placeholder="Enter Otp" autoComplete='off' onChange={(e)=>setUserOtp(e.target.value)} required />
+                                                <Form.Control type="text" name='userotp' placeholder="Enter Otp" autoComplete='off' onChange={(e) => setUserOtp(e.target.value)} required />
                                             </Form.Group>
                                             <div style={{ display: 'grid', justifyItems: 'center' }}>
                                                 <Button type='button' variant="primary" onClick={(e) => verify()}> Check Otp </Button>
@@ -158,7 +190,7 @@ const SignUp = () => {
                         :
 
                         <Container fluid>
-                            <div style={{ width: '26%', height: '40%', boxShadow: "10px 10px 10px 10px #888888", position: 'absolute', marginTop: '10%' }}>
+                            <div style={{ width: '26%', height: '50%', boxShadow: "10px 10px 10px 10px #888888", position: 'absolute', marginTop: '10%' }}>
                                 <div id='showDiv1'>
                                     <Form style={{ padding: '30px', display: 'block' }} ref={form} onSubmit={sendEmail} >
                                         <h6>SignUp</h6>
@@ -171,6 +203,9 @@ const SignUp = () => {
                                         <Form.Group className="mb-3" >
                                             <Form.Label>Email address</Form.Label>
                                             <Form.Control type="email" name='userEmail' value={userData.userEmail} placeholder="enter email" autoComplete='off' onChange={handlshow} required />
+                                            <div id='emailErrShow' style={{ display: 'none' }}>
+                                                <p style={{ color: 'red' }}>Email Already Register</p>
+                                            </div>
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" >
@@ -182,27 +217,14 @@ const SignUp = () => {
                                             <Button type='submit' variant="primary"> SignUp </Button>
                                         </div>
                                     </Form>
-                                </div>
 
-                                <div id='showDiv2'>
-                                    <Form style={{ padding: '30px', display: 'none' }} >
-                                        <h6>Otp Verification</h6>
-                                        <hr />
-                                        <Form.Group className="mb-3" >
-                                            <Form.Label>Enter Otp</Form.Label>
-                                            <Form.Control type="text" name='userotp' placeholder="Enter Otp" autoComplete='off' required />
-                                        </Form.Group>
-                                        <div style={{ display: 'grid', justifyItems: 'center' }}>
-                                            <Button type='button' variant="primary" onClick={(e) => verify()}> Check Otp </Button>
-                                        </div>
-                                    </Form>
+                                    <div style={{ padding: '15px' }}>
+                                        <h6>Already have account? <Link to='/'>Login</Link></h6>
+                                    </div>
                                 </div>
-
                             </div>
                         </Container>
                 }
-
-
             </div>
         </>
     );

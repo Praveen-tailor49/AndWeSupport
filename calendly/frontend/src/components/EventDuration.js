@@ -30,7 +30,8 @@ const EventDuration = ({ state, eventT }) => {
             "eventType": eventT,
             "location": state.location,
             "description": state.description,
-            "duration": duration
+            "duration": duration,
+            "userToken":localStorage.getItem('token')
         });
 
         var requestOptions = {

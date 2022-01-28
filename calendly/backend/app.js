@@ -36,9 +36,9 @@ app.post('/SignUp', (req, res) => {
 
 app.post('/events', (req, res) => {
 
-    const { eventName, eventType, location, description, duration } = req.body;
-    db.query(`INSERT INTO eventbooking (eventName, eventType, location, description, duration) VALUES (?,?,?,?,?)`,
-        [eventName, eventType, location, description, duration],
+    const { eventName, eventType, location, description, duration, userToken } = req.body;
+    db.query(`INSERT INTO eventbooking (eventName, eventType, location, description, duration, userToken) VALUES (?,?,?,?,?,?)`,
+        [eventName, eventType, location, description, duration, userToken],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -51,12 +51,33 @@ app.post('/events', (req, res) => {
 })
 
 app.post('/allEvents', (req, res) => {
+    const {token} = req.body
     db.query(
-        `SELECT * FROM eventbooking`,
+        `SELECT * FROM eventbooking WHERE userToken = '${token}'`,
         (err, result) => {
             return res.json(result);
         }
     )
+})
+
+app.post('/userData', (req, res) => {
+
+    const {token} = req.body
+    if(!token){
+        db.query(
+            `SELECT * FROM userdata `,
+            (err, result) => {
+                return res.json(result);
+            }
+        )
+    } else {
+        db.query(
+            `SELECT * FROM userdata WHERE userToken = '${token}'`,
+            (err, result) => {
+                return res.json(result);
+            }
+        )
+    }
 })
 
 

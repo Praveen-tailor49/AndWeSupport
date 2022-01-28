@@ -8,6 +8,7 @@ import EventForm from './components/EventForm';
 import EventDuration from './components/EventDuration';
 import Calender from './components/Calender';
 import SignUp from './components/SignUp';
+import Login from './components/Login';
  
 function App() {
 
@@ -36,7 +37,8 @@ const handlshow = (e) => {
   return (
     <>
       <Routes>
-          <Route path = '/' element= {<SignUp/>} />
+          <Route path = '/' element= {<Login/>} />
+          <Route path = '/signUp' element= {<SignUp/>} />
           <Route path = '/home' element= {<Home/>} />
           <Route path = '/calender' element= {<Calender/>} />
           <Route path = '/events' element= {<CreateEvent eventType={eventType}/>} />
