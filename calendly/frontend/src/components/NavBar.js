@@ -1,8 +1,17 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import img from '../image/calendly.png'
+import {  useNavigate } from "react-router-dom";
+
 
 const NavBar = () => {
+
+    const navigate = useNavigate();
+
+    const logOut = () => {
+        localStorage.removeItem('token')
+        navigate("/")        
+    }
     return (
         <>
             <Navbar bg="light" expand="lg">
@@ -27,7 +36,7 @@ const NavBar = () => {
                                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                <NavDropdown.Item onClick={()=>logOut()}>Logout</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>

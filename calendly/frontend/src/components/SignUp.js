@@ -51,33 +51,26 @@ const SignUp = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        if (userData.userReData.length > 0 || userData.userReData.length === 0) {
-            userData.userReData.forEach(val => {
-                if (userData.userEmail === val.userEmail) {
-                    document.getElementById('emailErrShow').style.display = 'block';
-                } else {
-                    emailjs.sendForm('service_mocy6ly', 'template_4rvhjcd', e.target, "user_ZAGjoe6gJVVDW5JLRe4NG")
-                        .then((result) => {
-                            setShow(true)
-                            document.getElementById('showDiv1').style.display = 'none';
-                            document.getElementById('showDiv2').style.display = 'block';
-                        }, (error) => {
-                            console.log(error.text);
-                        });
-                }
-            })
-        // } else if (userData.userReData.length === 0) {
-        //     emailjs.sendForm('service_mocy6ly', 'template_4rvhjcd', e.target, "user_ZAGjoe6gJVVDW5JLRe4NG")
-        //         .then((result) => {
-        //             setShow(true)
-        //             document.getElementById('showDiv1').style.display = 'none';
-        //             document.getElementById('showDiv2').style.display = 'block';
-        //         }, (error) => {
-        //             console.log(error.text);
-        //         });
+        const {userReData, userEmail} = userData
+
+        let includes =  false;
+
+        for(let obj of userReData){
+            if(obj[`userEmail`] === userEmail){
+                includes = true;
+                break;
+            }
         }
 
-
+        includes ?
+        document.getElementById('emailErrShow').style.display = 'block'
+        :
+        emailjs.sendForm('service_mocy6ly', 'template_4rvhjcd', e.target, "user_ZAGjoe6gJVVDW5JLRe4NG")
+        .then((result) => {
+            setShow(true)
+        }, (error) => {
+            console.log(error.text);
+        });
     }
 
     const verify = () => {
@@ -139,38 +132,7 @@ const SignUp = () => {
                             </Alert>
                             <Container fluid>
                                 <div style={{ width: '26%', height: '44%', boxShadow: "10px 10px 10px 10px #888888", position: 'absolute', marginTop: '10%' }}>
-                                    <div id='showDiv1' style={{ display: 'block' }}>
-
-                                        <Form style={{ padding: '30px' }} ref={form} onSubmit={sendEmail} >
-                                            <h6>SignUp</h6>
-                                            <hr />
-                                            <Form.Group className="mb-3" >
-                                                <Form.Label>Name</Form.Label>
-                                                <Form.Control type="text" name='userName' value={userData.userName} placeholder="enter name" autoComplete='off' onChange={handlshow} required />
-                                            </Form.Group>
-
-                                            <Form.Group className="mb-3" >
-                                                <Form.Label>Email address</Form.Label>
-                                                <Form.Control type="email" name='userEmail' value={userData.userEmail} placeholder="enter email" autoComplete='off' onChange={handlshow} required />
-
-                                            </Form.Group>
-
-                                            <Form.Group className="mb-3" >
-                                                <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" name='userPassward' value={userData.userPassward} placeholder="enter password" autoComplete='off' onChange={handlshow} required />
-                                            </Form.Group>
-                                            <Form.Group className="mb-3" >
-                                                <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" name='userPassward' value={userData.userPassward} placeholder="enter password" autoComplete='off' onChange={handlshow} required />
-                                            </Form.Group>
-
-                                            <div style={{ display: 'grid', justifyItems: 'center' }}>
-                                                <Button type='submit' variant="primary"> SignUp </Button>
-                                            </div>
-                                        </Form>
-                                    </div>
-
-                                    <div id='showDiv2' style={{ display: 'none' }} >
+                                    <div >
                                         <Form style={{ padding: '30px' }} >
                                             <h6>Otp Verification</h6>
                                             <hr />
@@ -191,7 +153,7 @@ const SignUp = () => {
 
                         <Container fluid>
                             <div style={{ width: '26%', height: '50%', boxShadow: "10px 10px 10px 10px #888888", position: 'absolute', marginTop: '10%' }}>
-                                <div id='showDiv1'>
+                                <div>
                                     <Form style={{ padding: '30px', display: 'block' }} ref={form} onSubmit={sendEmail} >
                                         <h6>SignUp</h6>
                                         <hr />

@@ -1,5 +1,5 @@
 var http = require('http')
-const express =  require('express')
+const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql')
 const app = express();
@@ -46,12 +46,12 @@ app.post('/events', (req, res) => {
             else {
                 res.status(200).json('Successfully');
             }
-        }   
+        }
     )
 })
 
 app.post('/allEvents', (req, res) => {
-    const {token} = req.body
+    const { token } = req.body
     db.query(
         `SELECT * FROM eventbooking WHERE userToken = '${token}'`,
         (err, result) => {
@@ -62,26 +62,45 @@ app.post('/allEvents', (req, res) => {
 
 app.post('/userData', (req, res) => {
 
-    const {token} = req.body
-    if(!token){
-        db.query(
-            `SELECT * FROM userdata `,
-            (err, result) => {
-                return res.json(result);
-            }
-        )
-    } else {
-        db.query(
-            `SELECT * FROM userdata WHERE userToken = '${token}'`,
-            (err, result) => {
-                return res.json(result);
-            }
-        )
-    }
+
+    db.query(
+        `SELECT * FROM userdata `,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
 })
 
+app.post('/userDataToken', (req, res) => {
 
+    const { token } = req.body
 
-app.listen(process.env.PORT || PORT, ()=>{
+    db.query(
+        `SELECT * FROM userdata WHERE userToken = '${token}'`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+app.post('/userLogin', (req, res) => {
+
+    const { userEmail, userPassward } = req.body
+
+    db.query(
+        `SELECT * FROM userdata WHERE userEmail = '${userEmail}' AND userPassward = '${userPassward}'`,
+        (err, result) => {
+            if (result.length === 0) {
+                res.json('Email and Password is wrong');
+            } else if (result.length === 1) {
+                res.status(200).json({ message: 'Successfully', data: result });
+            } else {
+                res.status(400).json(err);
+            }
+        }
+    )
+})
+
+app.listen(process.env.PORT || PORT, () => {
     console.log(`server is runing port ${PORT}`);
 })

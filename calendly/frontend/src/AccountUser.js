@@ -22,11 +22,14 @@ const AccountUser = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3001/userData", requestOptions)
+        fetch("http://localhost:3001/userDataToken", requestOptions)
             .then(response => response.json())
-            .then(result => setUserProfileData(result))
+            .then(result =>{
+                console.log(result)
+                setUserProfileData(result) })
+            
             .catch(error => console.log('error', error));
-    }, [])
+    })
     
     return (
         <>
