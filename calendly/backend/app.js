@@ -19,9 +19,9 @@ const db = mysql.createConnection({
 
 app.post('/SignUp', (req, res) => {
 
-    const { userName, userEmail, userPassward, userToken } = req.body;
-    db.query(`INSERT INTO userdata (userName, userEmail, userPassward, userToken) VALUES (?,?,?,?)`,
-        [userName, userEmail, userPassward, userToken],
+    const { userName, userEmail, userPassward, userToken, slugUrl } = req.body;
+    db.query(`INSERT INTO userdata (userName, userEmail, userPassward, userToken, slugUrl) VALUES (?,?,?,?,?)`,
+        [userName, userEmail, userPassward, userToken, slugUrl],
         (err, result) => {
             if (err) {
                 res.status(400).json('Already Register');

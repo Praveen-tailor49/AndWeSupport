@@ -74,7 +74,7 @@ const SignUp = () => {
     }
 
     const verify = () => {
-
+    
         if (userOtp == otps) {
             alert('login')
             storData()
@@ -96,7 +96,8 @@ const SignUp = () => {
             "userName": userName,
             "userEmail": userEmail,
             "userPassward": userPassward,
-            "userToken": token
+            "userToken": token,
+            "slugUrl":userName
         });
 
         var requestOptions = {

@@ -25,9 +25,7 @@ const AccountUser = () => {
         fetch("http://localhost:3001/userDataToken", requestOptions)
             .then(response => response.json())
             .then(result =>{
-                console.log(result)
                 setUserProfileData(result) })
-            
             .catch(error => console.log('error', error));
     })
     
@@ -39,9 +37,18 @@ const AccountUser = () => {
                     <div style={{ display: 'flex' }}>
                         <h1><i className="fas fa-user-circle"></i> </h1>
                         {
-                            userProfileData.map(val => (
-                                <p style={{ margin: '15px' }}>{val.userName}</p>
-                            ))
+                            userProfileData.map(val => {
+                                const path = val.slugUrl+'/'+localStorage.getItem('token')
+                                console.log(path);
+                                return(
+                                    <>
+                                        <p style={{ margin: '15px' }}>{val.userName}</p>
+
+                                        <Link to={path} style={{ color:'blue' }}>{val.slugUrl}/{localStorage.getItem('token')}</Link>
+                                    </>
+                                )
+                            }
+                            )
                         }
                     </div>
                     <div style={{ display: 'grid', justifyItems: 'end', margin: '0px' }}>
