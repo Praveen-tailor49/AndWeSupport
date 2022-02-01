@@ -19,12 +19,12 @@ function App() {
     description: '',
 })
 
+
   const eventType = (eventType) => {
       setEventType(eventType)
   }
 
- 
-
+  
 const handlshow = (e) => {
     const {name, value} = e.target
 
@@ -40,7 +40,7 @@ const handlshow = (e) => {
           <Route path = '/' element= {<Login/>} />
           <Route path = '/signUp' element= {<SignUp/>} />
           <Route path = '/home' element= {<Home/>} />
-          <Route path = '/' element= {<Calender/>} />
+          <Route path = '/book/:id/:token' element= {<Calender/>} />
           <Route path = '/events' element= {<CreateEvent eventType={eventType}/>} />
           <Route path = '/eventsForm' element= {<EventForm handlshow={handlshow} state={state} />} />
           <Route path = '/eventsDuration' element= {<EventDuration eventT={eventT} state={state}  />} />

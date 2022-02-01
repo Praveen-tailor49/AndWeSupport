@@ -3,7 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-const AccountUser = () => {
+const AccountUser = ({ getPath }) => {
 
     const [userProfileData, setUserProfileData] = useState([])
 
@@ -24,11 +24,12 @@ const AccountUser = () => {
 
         fetch("http://localhost:3001/userDataToken", requestOptions)
             .then(response => response.json())
-            .then(result =>{
-                setUserProfileData(result) })
+            .then(result => {
+                setUserProfileData(result)
+            })
             .catch(error => console.log('error', error));
     })
-    
+
     return (
         <>
             <hr style={{ margin: '0 rem 0 !important' }} />
@@ -38,13 +39,12 @@ const AccountUser = () => {
                         <h1><i className="fas fa-user-circle"></i> </h1>
                         {
                             userProfileData.map(val => {
-                                const path = val.slugUrl+'/'+localStorage.getItem('token')
-                                console.log(path);
-                                return(
+                                
+                                return (
                                     <>
                                         <p style={{ margin: '15px' }}>{val.userName}</p>
 
-                                        <Link to={path} style={{ color:'blue' }}>{val.slugUrl}/{localStorage.getItem('token')}</Link>
+                                        <Link to={'/book/'+val.slugUrl+'/'+localStorage.getItem('token')} style={{ color: 'blue' }} onClick={() => getPath()}>{val.slugUrl}/{localStorage.getItem('token')}</Link>
                                     </>
                                 )
                             }
