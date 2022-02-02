@@ -6,9 +6,11 @@ import {Routes, Route} from "react-router-dom"
 import CreateEvent from './components/CreateEvent';
 import EventForm from './components/EventForm';
 import EventDuration from './components/EventDuration';
-import Calender from './components/Calender';
+import BookEvent from './components/BookEvent';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import Calender from './components/Calender';
+import 'react-calendar/dist/Calendar.css';
  
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
     location: '',
     description: '',
 })
+
+const [bookEventData, setBookEventDetails] = useState([])
 
 
   const eventType = (eventType) => {
@@ -34,13 +38,19 @@ const handlshow = (e) => {
     }))
 }
 
+const bookEventDetails = (val) =>{
+  setBookEventDetails(val);
+  console.log(val);
+}
+
   return (
     <>
       <Routes>
           <Route path = '/' element= {<Login/>} />
           <Route path = '/signUp' element= {<SignUp/>} />
           <Route path = '/home' element= {<Home/>} />
-          <Route path = '/book/:id/:token' element= {<Calender/>} />
+          <Route exact path = '/calender' element= {<Calender bookEventData={bookEventData}/>} />
+          <Route path = '/book/:id/:token' element= {<BookEvent bookEventDetails={bookEventDetails}/>} />
           <Route path = '/events' element= {<CreateEvent eventType={eventType}/>} />
           <Route path = '/eventsForm' element= {<EventForm handlshow={handlshow} state={state} />} />
           <Route path = '/eventsDuration' element= {<EventDuration eventT={eventT} state={state}  />} />

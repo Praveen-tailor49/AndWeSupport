@@ -81,10 +81,10 @@ const EventDuration = ({ state, eventT }) => {
                                         <Form.Label>Duration </Form.Label>
                                         <Form.Select onClick={(e) => handlshow(e.target.value)}>
                                             <option value="none" selected disabled hidden>Duration</option>
-                                            <option value="15 min">15 min</option>
-                                            <option value="30 min">30 min</option>
-                                            <option value="45 min">45 min</option>
-                                            <option value="60 min">60 min</option>
+                                            <option value="15 ">15 min</option>
+                                            <option value="30 ">30 min</option>
+                                            <option value="45 ">45 min</option>
+                                            <option value="60 ">60 min</option>
                                             <option value="custom">Custom</option>
                                         </Form.Select>
                                     </Form.Group>

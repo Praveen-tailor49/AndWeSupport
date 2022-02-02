@@ -83,6 +83,18 @@ app.post('/userDataToken', (req, res) => {
     )
 })
 
+app.post('/eventsButton', (req, res) => {
+
+    const { btnId } = req.body
+
+    db.query(
+        `SELECT * FROM buttondata WHERE btnId = '${btnId}'`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
 app.post('/userLogin', (req, res) => {
 
     const { userEmail, userPassward } = req.body
