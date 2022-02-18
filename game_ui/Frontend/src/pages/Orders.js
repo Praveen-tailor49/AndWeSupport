@@ -9,7 +9,7 @@ const Orders = () => {
         <>
             <div>
                 <Navbar bg="primary" expand="lg" variant="dark">
-                    <Navbar.Brand href="#home" style={{color:'white'}}><Link to='/mine' style={{marginLeft:'42px', color:'white'}}><IoMdArrowRoundBack/></Link> <span style={{marginLeft:'42px'}}>Orders</span> </Navbar.Brand>
+                    <Navbar.Brand href="#home" style={{color:'white'}}><Link to='/mine' style={{marginLeft:'42px', color:'white'}}><IoMdArrowRoundBack/></Link> <span style={{marginLeft:'22px'}}>Orders</span> </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" style={{padding:'20px'}}>
                         <Nav className="me-auto">

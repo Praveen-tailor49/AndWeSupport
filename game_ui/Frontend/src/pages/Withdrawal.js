@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar, Form, Dropdown, Button } from 'react-bootstrap';
 import { BiRupee } from 'react-icons/bi';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
 
 const Withdrawal = () => {
@@ -9,7 +10,7 @@ const Withdrawal = () => {
         <>
             <div>
                 <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand style={{ marginLeft: '30px' }}><IoMdArrowRoundBack /></Navbar.Brand>
+                    <Navbar.Brand ><Link to='/mine' style={{ marginLeft: '42px', color: 'white' }}><IoMdArrowRoundBack /></Link></Navbar.Brand>
                     <Navbar.Brand >Withdrawal</Navbar.Brand>
                 </Navbar>
             </div>
@@ -83,9 +84,9 @@ const Withdrawal = () => {
 
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                    <div>
-                        <Button style={{ width: '10rem', margin: '6px' }} variant="primary" type="submit">
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{margin:'4rem'}}>
+                        <Button style={{ width: '10rem', marginBottom: '26px' }} variant="primary" type="submit">
                             Withdrawal
                         </Button>
                     </div>
@@ -93,7 +94,7 @@ const Withdrawal = () => {
                 </div>
             </div>
 
-            <Footer/>
+            <Footer />
         </>
     )
 }

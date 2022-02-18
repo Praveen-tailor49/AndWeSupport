@@ -28,16 +28,16 @@ const MinePage = () => {
             <div style={{ backgroundColor: '#DCDCDC	' }}>
                 <div style={{ padding: '30px' }}>
                     <div>
-                        <h4>ID: 102240</h4>
+                        <h6>ID: 102240</h6>
                     </div>
                     <div>
-                        <h4>Mobile: +919856231485</h4>
+                        <h6>Mobile: +919856231485</h6>
                     </div>
                     <div>
-                        <h4>Nick Name: MemberB2K32FCH</h4>
+                        <h6>Nick Name: MemberB2K32FCH</h6>
                     </div>
                     <div>
-                        <h4>Available balance: <BiRupee /> 0.00</h4>
+                        <h6>Available balance: <BiRupee /> 0.00</h6>
                     </div>
                 </div>
             </div>

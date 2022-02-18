@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <>
-            <div style={{ position: 'fixed', left: '0', bottom: '0', width: '100%', backgroundColor: '#C0C0C0', textAlign: 'center' }}>
+        
+            <div style={{ position: 'fixed', left: '0', bottom: '0', width: '100%', backgroundColor: '#C0C0C0', textAlign: 'center', }}>
                 <div>
                     <Row>
                         <Col>

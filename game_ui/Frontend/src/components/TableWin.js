@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap';
 import { AiFillTrophy } from 'react-icons/ai';
-import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
+// import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
 
 const TableWin = () => {
     return (
@@ -14,8 +14,8 @@ const TableWin = () => {
                     <h6>Partiy Record</h6>
                 </div>
             </div>
-            <div>
-                <Table striped bordered hover>
+            <div style={{marginBottom:'6rem',  textAlign:'center'}}>
+                <Table striped bordered hover >
                     <thead>
                         <tr>
                             <th>Period</th>
@@ -27,12 +27,17 @@ const TableWin = () => {
                         <tr>
                             <td>1</td>
                             <td>85555</td>
-                            <td><span style={{background:'red', borderRadius:'30px 30px', color:'red'}}><RiCheckboxBlankCircleLine/></span></td>
+                            <td>A</td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Jacob</td>
-                            <td><span style={{background:'green', borderRadius:'30px 30px', color:'green'}}><RiCheckboxBlankCircleLine/></span></td>
+                            <td>B</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Jacob</td>
+                            <td>T</td>
                         </tr>
                     </tbody>
                 </Table>

@@ -5,7 +5,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import {Link} from 'react-router-dom'
 import Footer from '../components/Footer';
 
-export const ResetPassword = () => {
+ const ResetPassword = () => {
     return (
         <>
             <div>
@@ -41,7 +41,7 @@ export const ResetPassword = () => {
                     </Form.Group>
 
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <div>
+                        <div style={{marginBottom:'6rem'}}>
                             <Button style={{ width: '16rem' }} variant="primary" type="submit">
                                Continue
                             </Button>
@@ -54,3 +54,5 @@ export const ResetPassword = () => {
         </>
     )
 }
+
+export default ResetPassword

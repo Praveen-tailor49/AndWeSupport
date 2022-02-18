@@ -2,12 +2,12 @@ import React from 'react'
 import Footer from '../components/Footer';
 import TableWin from '../components/TableWin';
 import WinHeader from '../components/WinHeader';
-import WinNav from '../components/WinNav';
+
 
 const Win = () => {
     return (
         <>
-            <WinNav/>
+            {/* <WinNav/> */}
             <WinHeader/>
             <TableWin/>
             <Footer/>

@@ -43,18 +43,18 @@ const Promotion = () => {
                 </div>
 
                 <div style={{ padding: '25px' }}>
-                    <p>My Promotion Link</p>
-                    <h6>https://meok.in/promote/#/register?c=B2K32FCH</h6>
+                    <p>Get Upto 10% Extra Off using Promotion Code</p>
+                    {/* <h6>https://meok.in/promote/#/register?c=B2K32FCH</h6> */}
                     <hr />
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <div>
                         <Button style={{ width: '10rem', margin: '6px' }} variant="light" type="submit">
                             Open Link
                         </Button>
                     </div>
-                </div>
+                </div> */}
             </div>
             <Footer/>
         </>

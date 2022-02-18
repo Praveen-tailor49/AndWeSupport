@@ -10,19 +10,19 @@ function MineDropdown() {
 
                     <div style={{ marginTop: '15px' }}>
                         <Dropdown>
-                            <Dropdown.Toggle style={{ width: '100vw', textAlign: 'inherit' }} id="dropdown-button-dark-example1" variant="light">
+                        <Link to='/orders' style={{color:'black', textDecoration:'none'}}><Dropdown.Toggle style={{ width: '100vw', textAlign: 'inherit' }} id="dropdown-button-dark-example1" variant="light">
                                 
-                                <Link to='/orders' style={{color:'black', textDecoration:'none'}}>Order</Link>
-                            </Dropdown.Toggle>
+                                Order
+                            </Dropdown.Toggle></Link>
                         </Dropdown>
                     </div>
 
                     <div style={{ marginTop: '15px' }}>
                         <Dropdown>
-                            <Dropdown.Toggle style={{ width: '100vw', textAlign: 'inherit' }} id="dropdown-button-dark-example1" variant="light">
+                        <Link to='/promotion' style={{color:'black', textDecoration:'none'}}><Dropdown.Toggle style={{ width: '100vw', textAlign: 'inherit' }} id="dropdown-button-dark-example1" variant="light">
                                 
-                                <Link to='/promotion' style={{color:'black', textDecoration:'none'}}>Promotion</Link>
-                            </Dropdown.Toggle>
+                               Promotion
+                            </Dropdown.Toggle></Link>
                         </Dropdown>
                     </div>
 
@@ -36,7 +36,7 @@ function MineDropdown() {
                             <Dropdown.Menu variant="light" style={{ width: '100vw' }}>
                                 <Dropdown.Item active>
                                    
-                                    <Link to='/add/bank' style={{color:'black', textDecoration:'none'}}> Recharge</Link>
+                                    <Link to='/recharge' style={{color:'black', textDecoration:'none'}}> Recharge</Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item > <Link to='/withdrawal' style={{color:'black', textDecoration:'none'}}>Withdrawal</Link></Dropdown.Item>
                                 <Dropdown.Item > <Link to='/transactions' style={{color:'black', textDecoration:'none'}}>Transactions</Link></Dropdown.Item>
