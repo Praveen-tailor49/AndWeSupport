@@ -22,12 +22,14 @@ import Home from './pages/Home';
 import AdminPage from './pages/AdminPage';
 import UserManagement from './adminPages/UserManagement';
 import Pages from './adminPages/Pages';
+import WinTwo from './pages/WinTwo';
 
 function App() {
   return (
     <>
       <Routes>
           <Route exact path='/' element={<Login/>}/>
+          <Route exact path='/Win2' element={<WinTwo/>}/>
           <Route exact path='/register' element={<Register/>}/>
           <Route path='/reset/password' element={<ResetPassword/>}/>
           <Route path='/home' element={<Home/>}/>
