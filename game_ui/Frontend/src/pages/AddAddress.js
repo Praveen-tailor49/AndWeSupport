@@ -21,6 +21,7 @@ const AddAddress = () => {
 
 
     const showAddressDetails = () =>{
+        document.getElementById('showDiv').style.display = 'none'
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 

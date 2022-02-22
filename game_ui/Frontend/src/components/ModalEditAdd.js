@@ -7,7 +7,7 @@ const ModalWin = (props) => {
     const [userBankInfo, setUserBankInfo] = useState({
         userId: localStorage.getItem('token'), actualName: props.val.actualName, ifseCode: props.val.ifseCode, bankName: props.val.bankName, accountNumber: props.val.accountNumber, state: props.val.state, city: props.val.city, address: props.val.address, mobileNumber: props.val.mobileNumber, email: props.val.email, upiAccount: props.val.upiAccount, userStatus: '0', userDelete: '1'
     })
-    const [show, setShow] = useState(false)
+    // const [show, setShow] = useState(false)
 
     const HandlShow = (e) => {
 
@@ -18,7 +18,7 @@ const ModalWin = (props) => {
             [name]: value,
         }))
     }
-console.log( props.val.actualName);
+// console.log( props.val.actualName);
     return (
         <>
             <div>

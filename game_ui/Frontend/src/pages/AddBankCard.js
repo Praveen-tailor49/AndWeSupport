@@ -9,7 +9,7 @@ import ModalWin from '../components/ModalEditAdd';
 const AddBankCard = () => {
 
     const [userBankInfo, setUserBankInfo] = useState({
-        userId: localStorage.getItem('token'), actualName: '', ifseCode: '', bankName: '', accountNumber: '', state: '', city: '', address: '', mobileNumber: '', email: '', upiAccount: '', userStatus: '0', userDelete: '1',val:''
+        userId: localStorage.getItem('token'), actualName: '', ifseCode: '', bankName: '', accountNumber: '', state: '', city: '', address: '', mobileNumber: '', email: '', upiAccount: '', userStatus: 0, userDelete: 1,val:''
     })
 
     const [userBankDetails, setUserBankDetails] = useState([])

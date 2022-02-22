@@ -19,6 +19,9 @@ import RiskDisclosureAgreement from './pages/RiskDisclosureAgreement';
 import Recharge from './pages/Recharge';
 // import AuthUser from "./AuthUser";
 import Home from './pages/Home';
+import AdminPage from './pages/AdminPage';
+import UserManagement from './adminPages/UserManagement';
+import Pages from './adminPages/Pages';
 
 function App() {
   return (
@@ -40,6 +43,13 @@ function App() {
           <Route path='/transactions' element={<Transactions/>}/>
           <Route path='/RiskDisclosure' element={<RiskDisclosureAgreement/>}/>
           <Route path='/recharge' element={<Recharge/>}/>
+
+
+          {/* Admin pages */}
+
+          <Route path='/admin' element={<AdminPage/>}/>
+          <Route path='/user/management' element={<UserManagement/>}/>
+          <Route path='/user/pages' element={<Pages/>}/>
 
 
 
